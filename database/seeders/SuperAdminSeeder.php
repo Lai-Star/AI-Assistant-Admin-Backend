@@ -20,7 +20,7 @@ class SuperAdminSeeder extends Seeder
                 'name' => 'Super Admin',
                 'password' => Hash::make(env('SUPER_ADMIN_PASSWORD', 'adminroot')), // use bcrypt/Hash
                 'email_verified_at' => now(),
-                'role' => 'superadmin', // optional: if you have roles
+                // 'role' => 'superadmin', // optional: if you have roles
             ]
         );
     }
