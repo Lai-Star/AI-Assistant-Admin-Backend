@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->string('image')->nullable();
-            $table->unsignedBigInteger('leader_user_id')->default(0);
+            $table->bigInteger('leader_user_id')->default(0)->check('leader_user_id >= 0');
             $table->integer('member_cnt')->default(0);
             $table->timestamps();
         });
