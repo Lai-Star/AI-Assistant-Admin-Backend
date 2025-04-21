@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Resources\User;
+namespace App\Http\Resources\UserGroup;
 
 use App\Models\User;
-use App\Models\UserGroup;
 use App\Models\Company;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class UserGroupResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,11 +19,9 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'email' => $this->email,
             'company_name' => Company::find($this->company_id)->name ?? '',
-            'user_group_name' => UserGroup::find($this->user_group_id)->name ?? '',
+            'member_cnt' => $this->member_cnt,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ];
     }
 }

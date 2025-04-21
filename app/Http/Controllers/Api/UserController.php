@@ -38,15 +38,27 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function save()
+    public function save(Request $request)
     {
         $id = intval(request()->get('id', -1));
-
+        $leader = auth()->user();
+        
         $user = User::find($id);
         if ($user === null) {
-            $userId = $this->userRepository->create($request->all());
+            $userData = [
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => $request->input('password'),
+                'company_id' => $leader->company_id,
+                'user_group_id' => $request->input('userGroup'),
+                'passwordConfirm' => $request->input('confirmationPassword'),
+                'role' => $request->input('role') ?? 2
+            ];
 
-            if (!$userId) {
+            $userRequest = new Request($userData);
+            $user = AuthController::createUser($userRequest);
+
+            if (!$user) {
                 return response()->json(['message'=>'User saved failed'], 400);
             }
         } else {

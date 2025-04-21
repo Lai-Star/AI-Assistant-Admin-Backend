@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\UserGroupController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -49,5 +50,14 @@ Route::group([
         Route::post('/save', [UserController::class, 'save']);
         Route::delete('/${id}', [UserController::class, 'destroy']);
         Route::get('/{id}', [UserController::class, 'show']);
+    });
+
+    Route::group([
+        'prefix' => 'user-group'
+    ], function () {
+        Route::get('/all', [UserGroupController::class, 'index']);
+        Route::post('/save', [UserGroupController::class, 'save']);
+        Route::delete('/${id}', [UserGroupController::class, 'destroy']);
+        Route::get('/{id}', [UserGroupController::class, 'show']);
     });
 });

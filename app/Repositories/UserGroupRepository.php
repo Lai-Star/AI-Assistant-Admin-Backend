@@ -3,41 +3,42 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use App\Models\UserGroup;
 
-class UserRepository implements UserRepositoryInterface
+class UserGroupRepository implements UserGroupRepositoryInterface
 {
     public function all(array $filters = [])
     {   
         $filters['limit'] = 5;
-        $query = User::query();
-
+        $query = UserGroup::query();
+        
         if (!empty($filters['name'])) {
             $query->where('name', 'Ilike', '%' . $filters['name'] . '%');
         }
-
+        
         return $query->orderByDesc('created_at')->paginate($filters['limit']);
     }
 
     public function find($id)
     {
-        return User::findOrFail($id);
+        return UserGroup::findOrFail($id);
     }
 
     public function create(array $data)
     {
-        return User::create($data);
+        return UserGroup::create($data);
     }
 
     public function update($id, array $data)
     {
-        $user = User::findOrFail($id);
+        $user = UserGroup::findOrFail($id);
         $user->update($data);
         return $user;
     }
 
     public function delete($id)
     {
-        return User::destroy($id);
+        return UserGroup::destroy($id);
     }
 }
 

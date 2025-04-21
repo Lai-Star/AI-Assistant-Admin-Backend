@@ -12,7 +12,7 @@ class CompanyRepository implements CompanyRepositoryInterface
         $query = Company::query();
 
         if (!empty($filters['name'])) {
-            $query->where('name', 'like', '%' . $filters['name'] . '%');
+            $query->where('name', 'Ilike', '%' . $filters['name'] . '%');
         }
 
         return $query->orderByDesc('created_at')->paginate($filters['limit']);

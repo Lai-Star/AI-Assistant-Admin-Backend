@@ -21,8 +21,9 @@ return new class extends Migration
             $table->rememberToken();
             
             // Using enum type
-            $table->enum('role', array_column(UserRole::cases(), 'value'))
-                  ->default(UserRole::Member->value);
+            // $table->enum('role', array_column(UserRole::cases(), 'value'))
+            //       ->default(UserRole::Member->value);
+            $table->integer('role')->default(2);
 
             $table->unsignedBigInteger('company_id')->nullable();
             $table->unsignedBigInteger('user_group_id')->nullable();

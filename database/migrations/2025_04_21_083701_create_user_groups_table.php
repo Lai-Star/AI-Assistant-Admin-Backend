@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('member_cnt')->default(0); // Optional: default to 0
             $table->unsignedBigInteger('created_by')->nullable(); // Foreign key
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('set null');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');

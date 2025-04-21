@@ -59,9 +59,26 @@ class AuthController extends Controller
         $validated['password'] = Hash::make($request['password']);
 
         $user = User::create($validated);
-
+        
         Alert::success('Success', 'Register user has been successfully !');
         return redirect('/login');
+    }
+
+    public static function createUser(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required',
+            'company_id' => 'nullable',
+            'user_group_id' => 'nullable',
+            'passwordConfirm' => 'required|same:password',
+            'role'=>'required'
+        ]);
+
+        $validated['password'] = Hash::make($request['password']);
+
+        return User::create($validated);
     }
 
     protected function respondWithToken($token, $user)
