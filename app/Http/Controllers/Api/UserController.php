@@ -16,7 +16,7 @@ class UserController extends Controller
     public function __construct(UserRepository $UserRepository)
     {
         $this->middleware('auth:api');
-        $this->UserRepository = $UserRepository;
+        $this->userRepository = $UserRepository;
     }
     /**
      * Display a listing of the resource.
@@ -28,7 +28,7 @@ class UserController extends Controller
             'limit' => $request->query('limit') ?? 5,
         ];
 
-        $users = $this->UserRepository->all($filters);
+        $users = $this->userRepository->all($filters);
 
         $result = new UserCollection($users);
 
@@ -50,14 +50,14 @@ class UserController extends Controller
                 return response()->json(['message'=>'User saved failed'], 400);
             }
         } else {
-            $user = $this->UserRepository->update($id, $request->all());
+            $user = $this->userRepository->update($id, $request->all());
 
             if (!$user) {
                 return response()->json(['message'=>'User updated failed'], 400);
             }
         }
 
-        $users = $this->UserRepository->all();
+        $users = $this->userRepository->all();
 
         $result = new UserCollection($users);
 
@@ -66,13 +66,13 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = $this->UserRepository->find($id);
+        $user = $this->userRepository->find($id);
         $result = new UserResource($user);
         return response()->json($result);
     }
 
     public function destroy($id)
     {
-        return response()->json($this->UserRepository->delete($id));
+        return response()->json($this->userRepository->delete($id));
     }
 }
