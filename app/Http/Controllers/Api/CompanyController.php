@@ -36,7 +36,6 @@ class CompanyController extends Controller
 
     public function save(Request $request) {
         $id = intval(request()->get('id', -1));
-        $user = request()->user();
 
         $company = Company::find($id);
         if ($company === null) {

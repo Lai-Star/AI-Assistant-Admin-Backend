@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 
 /*

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,5 +40,14 @@ Route::group([
         Route::post('/save', [CompanyController::class, 'save']);
         Route::delete('/${id}', [CompanyController::class, 'destroy']);
         Route::get('/{id}', [CompanyController::class, 'show']);
+    });
+
+    Route::group([
+        'prefix' => 'users'
+    ], function () {
+        Route::get('/all', [UserController::class, 'index']);
+        Route::post('/save', [UserController::class, 'save']);
+        Route::delete('/${id}', [UserController::class, 'destroy']);
+        Route::get('/{id}', [UserController::class, 'show']);
     });
 });
