@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:13
+    container_name: laravel-db
+    environment:
+      - POSTGRES_DB=aiassistantadmin
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+    volumes:
+      - pgsql-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgsql-data:

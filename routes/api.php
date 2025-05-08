@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserGroupController;
+use App\Http\Controllers\Api\MeetController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,8 +33,16 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'auth:api'
+    'middleware' => 'api'
 ], function () {
+    Route::group([
+        'prefix' => 'meet'
+    ], function () {
+        Route::post('/login', [MeetController::class, 'login']);
+        Route::post('/create', [MeetController::class, 'create']);
+        Route::post('/join', [MeetController::class, 'join']);
+    });
+
     Route::group([
         'prefix' => 'companies'
     ], function () {
